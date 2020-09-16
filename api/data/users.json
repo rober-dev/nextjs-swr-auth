@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "email": "me@rober.dev",
+    "username": "rober",
+    "fullname": "Roberto Fraga",
+    "password": "123",
+    "roles": ["ADMIN", "MANAGER", "USER"]
+  },
+  {
+    "id": 2,
+    "email": "sandro@gmail.com",
+    "username": "sandro",
+    "fullname": "Sandro Fraga",
+    "password": "123",
+    "roles": ["USER"]
+  }
+]
