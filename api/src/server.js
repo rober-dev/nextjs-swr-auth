@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
   res.json('hello');
 });
 app.post('/auth/login', authRoutes.login);
+app.post('/auth/register', authRoutes.register);
 
 // Start server
 app.listen(PORT, (err) => {
