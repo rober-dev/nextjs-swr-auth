@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --legacy-watch --watch ./src --inspect=0.0.0.0:9229 ./src/server.js",
+    "dev": "nodemon --legacy-watch --watch ./src --watch ./data --inspect=0.0.0.0:9229 ./src/server.js",
     "start": "node src/server"
   },
   "dependencies": {
