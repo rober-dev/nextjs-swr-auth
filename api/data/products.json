@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "name": "Zapatilla Adidas Pro 2500",
+    "brand": 1,
+    "price": 85,
+    "description": "Descripción de Zapatilla Adidas Pro 2500"
+  },
+  {
+    "id": 2,
+    "name": "Zapatillas Adidas Original",
+    "brand": 1,
+    "price": 60,
+    "description": "Descripción de Zapatillas Adidas Original"
+  },
+  {
+    "id": 3,
+    "name": "Zapatilla Nike Internationalist",
+    "brand": 2,
+    "price": 50,
+    "description": "Descripción de Zapatilla Nike Internationalist"
+  },
+  {
+    "id": 4,
+    "name": "Zapatilla Nike Daybreak",
+    "brand": 2,
+    "price": 120,
+    "description": "Zapatilla Nike Daybreak"
+  },
+  {
+    "id": 5,
+    "name": "Zapatilla ASICS Gel Venture 8",
+    "brand": 3,
+    "price": 63,
+    "description": "Descripción Zapatilla ASICS Gel Venture 8"
+  },
+  {
+    "id": 6,
+    "name": "Zapatilla ASICS JOLT 2",
+    "brand": 3,
+    "price": 10.5,
+    "description": "Zapatilla ASICS JOLT 2"
+  },
+  {
+    "id": 7,
+    "name": "Zapatilla Nike DBREAK Type Unisex",
+    "brand": 2,
+    "price": 120,
+    "description": "Descripción Zapatilla Nike DBREAK Type Unisex"
+  }
+]

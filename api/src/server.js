@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 
 // Custom libs
-const authRoutes = require('./routes/auth.routes');
+const authRoutes = require('./routes/routes.auth');
+const catalogRoutes = require('./routes/routes.catalog');
+const stockRoutes = require('./routes/routes.stock');
 
 // Get environment variables
 dotenv.config();
@@ -19,6 +21,11 @@ app.get('/', (req, res) => {
 });
 app.post('/auth/login', authRoutes.login);
 app.post('/auth/register', authRoutes.register);
+app.get('/catalog/brands', catalogRoutes.brands);
+app.get('/catalog/brands/:id', catalogRoutes.brandById);
+app.get('/catalog/products', catalogRoutes.products);
+app.get('/catalog/products/:id', catalogRoutes.productById);
+app.get('/catalog/products/:id/stock', stockRoutes.stockByProduct);
 
 // Start server
 app.listen(PORT, (err) => {

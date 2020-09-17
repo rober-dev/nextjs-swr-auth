@@ -1,5 +1,7 @@
 // Vendor libs
 const jwt = require('jsonwebtoken');
+
+// Custom libs
 const users = require('../../data/users.json');
 
 module.exports.login = (req, res) => {
