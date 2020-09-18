@@ -5,6 +5,7 @@ module.exports = gql`
   type Brand {
     id: ID!
     name: String!
+    slug: String!
   }
 
   type Product {
@@ -31,6 +32,9 @@ module.exports = gql`
 
   type Query {
     getAllBrands: [Brand!]!
+    getBrandById(id: ID!): Brand
+    getBrandBySlug(slug: String!): Brand
+    getBrandSlugs: [String!]!
     getAllProducts: [Product!]!
     productStock(productId: ID!): Stock
   }

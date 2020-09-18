@@ -37,7 +37,7 @@ const BrandsPage = (props) => {
   );
 };
 
-// Statoc props
+// Static props
 export async function getStaticProps() {
   debugger;
   const data = await graphQLFetcher(GET_ALL_BRANDS);

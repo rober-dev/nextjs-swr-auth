@@ -1,14 +1,17 @@
 [
   {
     "id": 1,
-    "name": "Adidas"
+    "name": "Adidas",
+    "slug": "adidas"
   },
   {
     "id": 2,
-    "name": "Nike"
+    "name": "Nike",
+    "slug": "nike"
   },
   {
     "id": 3,
-    "name": "ASICS"
+    "name": "ASICS",
+    "slug": "asics"
   }
 ]
