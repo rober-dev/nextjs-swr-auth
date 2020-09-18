@@ -52,6 +52,7 @@ export async function getStaticProps(ctx) {
   return { props: { ...data }, revalidate: 1 };
 }
 
+// Static paths
 export async function getStaticPaths() {
   const data = await graphQLFetcher(GET_BRAND_SLUGS);
   const slugs = data.getBrandSlugs.map((slug) => ({
