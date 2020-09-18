@@ -55,12 +55,12 @@ export async function getStaticProps(ctx) {
 // Static paths
 export async function getStaticPaths() {
   const data = await graphQLFetcher(GET_BRAND_SLUGS);
-  const slugs = data.getBrandSlugs.map((slug) => ({
+  const paths = data.getBrandSlugs.map((slug) => ({
     params: { slug },
   }));
 
   return {
-    paths: [...slugs],
+    paths,
     fallback: true,
   };
 }
