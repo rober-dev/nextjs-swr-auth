@@ -18,7 +18,6 @@ async function importNamespaces(lang, namespaces = []) {
 
 export async function getI18nProps(ctx, namespaces) {
   const lang = ctx.lang || ctx.params?.lang || defaultLanguage;
-  console.dir({ lang });
 
   return {
     lang,
