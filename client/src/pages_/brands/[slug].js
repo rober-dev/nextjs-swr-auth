@@ -8,6 +8,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { graphQLFetcher } from '../../libs/fetchers';
 import { getI18nProps, withI18n } from '../../libs/i18n';
 
+// Custom components
+import Layout from '../../layouts/default';
+
 // Queries
 import { GET_BRAND_BY_SLUG, GET_BRAND_SLUGS } from '../../queries/brands';
 
@@ -40,7 +43,7 @@ const BrandPage = (props) => {
 
   const brand = data?.getBrandBySlug;
   return (
-    <>
+    <Layout>
       <h1>
         {title} - {lang}
       </h1>
@@ -51,7 +54,7 @@ const BrandPage = (props) => {
           <p>{brand.slug}</p>
         </div>
       )}
-    </>
+    </Layout>
   );
 };
 
@@ -61,6 +64,7 @@ export async function getStaticProps(ctx) {
   const data = await graphQLFetcher(GET_BRAND_BY_SLUG, { slug });
   const trans = await getI18nProps(ctx, ['common', 'brands']);
 
+  console.log(ctx);
   return { props: { ...data, ...trans }, revalidate: 1 };
 }
 

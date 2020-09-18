@@ -5,6 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 // Custom libs
 import { getI18nProps, withI18n } from '../libs/i18n';
 
+// Custom components
+import Layout from '../layouts/default';
+
 // Component definition
 const HomePage = () => {
   // Get translations
@@ -12,11 +15,11 @@ const HomePage = () => {
   const title = t('home:title');
 
   return (
-    <>
+    <Layout>
       <h1>
         {title} - {lang}
       </h1>
-    </>
+    </Layout>
   );
 };
 
