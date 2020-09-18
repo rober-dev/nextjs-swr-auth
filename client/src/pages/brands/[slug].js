@@ -1,69 +1,34 @@
-// Vendor libs
-import React from 'react';
-import useSWR from 'swr';
-import { useRouter } from 'next/router';
+// @ts-nocheck
+import I18nProvider from 'next-translate/I18nProvider'
+import React from 'react'
+import C, * as _rest from '../../../src/pages_/brands/[slug]'
+import ns0 from '../../../locales/en/common.json'
+import ns1 from '../../../locales/en/layout.json'
 
-// Custom libs
-import { graphQLFetcher } from '../../libs/fetchers';
+const namespaces = { 'common': ns0, 'layout': ns1 }
 
-// Queries
-import { GET_BRAND_BY_SLUG, GET_BRAND_SLUGS } from '../../queries/brands';
-
-// Component definition
-const BrandPage = (props) => {
-  const router = useRouter();
-  const { slug } = router.query;
-
-  // Get data
-  const { data, error } = useSWR(
-    [GET_BRAND_BY_SLUG, { slug }],
-    graphQLFetcher,
-    {
-      initialData: props,
-    }
-  );
-
-  if (error) {
-    return <div>{`Error: ${error}`}</div>;
-  }
-
-  if (!error && !data) {
-    return <div>Loading ...</div>;
-  }
-
-  const brand = data?.getBrandBySlug;
+export default function Page(p){
   return (
-    <>
-      <h1>Brand page</h1>
-      {brand && (
-        <div>
-          <h3>{brand.name}</h3>
-          <p>{brand.id}</p>
-          <p>{brand.slug}</p>
-        </div>
-      )}
-    </>
-  );
-};
-
-// Static props
-export async function getStaticProps(ctx) {
-  const { slug } = ctx.params;
-  const data = await graphQLFetcher(GET_BRAND_BY_SLUG, { slug });
-  return { props: { ...data }, revalidate: 1 };
+    <I18nProvider 
+      lang="en" 
+      namespaces={namespaces}  
+      internals={{"defaultLanguage":"en","isStaticMode":true}}
+    >
+      <C {...p} />
+    </I18nProvider>
+  )
 }
 
-// Static paths
-export async function getStaticPaths() {
-  const data = await graphQLFetcher(GET_BRAND_SLUGS);
-  const paths = data.getBrandSlugs.map((slug) => ({
-    params: { slug },
-  }));
+Page = Object.assign(Page, { ...C })
 
-  return {
-    paths,
-    fallback: true,
-  };
+if(C && C.getInitialProps) {
+  Page.getInitialProps = ctx => C.getInitialProps({ ...ctx, lang: 'en'})
 }
 
-export default BrandPage;
+
+export const getStaticProps = ctx => _rest.getStaticProps({ ...ctx, lang: 'en' })
+export const getStaticPaths = ctx => _rest.getStaticPaths({ ...ctx, lang: 'en' })
+
+
+
+

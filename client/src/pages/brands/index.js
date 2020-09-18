@@ -1,47 +1,35 @@
-// Vendor libs
-import React from 'react';
-import useSWR from 'swr';
+// @ts-nocheck
+import I18nProvider from 'next-translate/I18nProvider'
+import React from 'react'
+import C, * as _rest from '../../../src/pages_/brands'
+import ns0 from '../../../locales/en/common.json'
+import ns1 from '../../../locales/en/layout.json'
+import ns2 from '../../../locales/en/brands.json'
 
-// Custom libs
-import { graphQLFetcher } from '../../libs/fetchers';
+const namespaces = { 'common': ns0, 'layout': ns1, 'brands': ns2 }
 
-// Queries
-import { GET_ALL_BRANDS } from '../../queries/brands';
-
-// Component definition
-const BrandsPage = (props) => {
-  // Get data
-  const { data, error } = useSWR(GET_ALL_BRANDS, graphQLFetcher, {
-    initialData: props,
-  });
-
-  if (error) {
-    return <div>{`Error: ${error}`}</div>;
-  }
-
-  if (!error && !data) {
-    return <div>Loading ...</div>;
-  }
-
+export default function Page(p){
   return (
-    <>
-      <h1>Brands page</h1>
-      {data && data.getAllBrands && (
-        <ul>
-          {data.getAllBrands.map((b) => (
-            <li key={b.id}>{b.name}</li>
-          ))}
-        </ul>
-      )}
-    </>
-  );
-};
-
-// Static props
-export async function getStaticProps() {
-  debugger;
-  const data = await graphQLFetcher(GET_ALL_BRANDS);
-  return { props: { ...data }, revalidate: 1 };
+    <I18nProvider 
+      lang="en" 
+      namespaces={namespaces}  
+      internals={{"defaultLanguage":"en","isStaticMode":true}}
+    >
+      <C {...p} />
+    </I18nProvider>
+  )
 }
 
-export default BrandsPage;
+Page = Object.assign(Page, { ...C })
+
+if(C && C.getInitialProps) {
+  Page.getInitialProps = ctx => C.getInitialProps({ ...ctx, lang: 'en'})
+}
+
+
+export const getStaticProps = ctx => _rest.getStaticProps({ ...ctx, lang: 'en' })
+
+
+
+
+

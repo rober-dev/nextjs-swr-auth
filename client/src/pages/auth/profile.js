@@ -1,13 +1,34 @@
-// Vendor libs
-import React from 'react';
+// @ts-nocheck
+import I18nProvider from 'next-translate/I18nProvider'
+import React from 'react'
+import C from '../../../src/pages_/auth/profile'
+import ns0 from '../../../locales/en/common.json'
+import ns1 from '../../../locales/en/layout.json'
 
-// Component definition
-const ProfilePage = () => {
+const namespaces = { 'common': ns0, 'layout': ns1 }
+
+export default function Page(p){
   return (
-    <>
-      <h1>Profile page</h1>
-    </>
-  );
-};
+    <I18nProvider 
+      lang="en" 
+      namespaces={namespaces}  
+      internals={{"defaultLanguage":"en","isStaticMode":true}}
+    >
+      <C {...p} />
+    </I18nProvider>
+  )
+}
 
-export default ProfilePage;
+Page = Object.assign(Page, { ...C })
+
+if(C && C.getInitialProps) {
+  Page.getInitialProps = ctx => C.getInitialProps({ ...ctx, lang: 'en'})
+}
+
+
+
+
+
+
+
+
