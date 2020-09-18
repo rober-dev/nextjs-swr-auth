@@ -31,14 +31,15 @@ const BrandPage = (props) => {
     return <div>Loading ...</div>;
   }
 
+  const brand = data?.getBrandBySlug;
   return (
     <>
       <h1>Brand page</h1>
-      {data && data.getBrandBySlug && (
+      {brand && (
         <div>
-          <h3>{data.getBrandBySlug.name}</h3>
-          <p>{data.getBrandBySlug.id}</p>
-          <p>{data.getBrandBySlug.slug}</p>
+          <h3>{brand.name}</h3>
+          <p>{brand.id}</p>
+          <p>{brand.slug}</p>
         </div>
       )}
     </>
