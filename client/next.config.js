@@ -1,12 +1,5 @@
 module.exports = {
   distDir: 'dist',
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      require('./src/generate-sitemap');
-    }
-
-    return config;
-  },
   async rewrites() {
     return [
       {
