@@ -1,7 +1,7 @@
 // @ts-nocheck
 import I18nProvider from 'next-translate/I18nProvider'
 import React from 'react'
-import C from '../../../src/pages_/auth/login'
+import C, * as _rest from '../../../src/pages_/auth/login'
 import ns0 from '../../../locales/en/common.json'
 import ns1 from '../../../locales/en/layout.json'
 
@@ -26,7 +26,7 @@ if(C && C.getInitialProps) {
 }
 
 
-
+export const getStaticProps = ctx => _rest.getStaticProps({ ...ctx, lang: 'en' })
 
 
 

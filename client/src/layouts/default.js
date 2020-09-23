@@ -5,7 +5,7 @@ import Head from 'next/head';
 
 // Custom components
 import BaseLayout from './_base';
-import Header from '../components/header';
+import Header from '../components/shared/header';
 
 // Component definition
 const DefaultLayout = ({ children }) => {
@@ -19,7 +19,7 @@ const DefaultLayout = ({ children }) => {
 
 // PropTypes
 BaseLayout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 // Exportation

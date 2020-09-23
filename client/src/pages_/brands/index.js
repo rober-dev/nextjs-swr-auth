@@ -1,10 +1,10 @@
 // Vendor libs
 import React from 'react';
 import useSWR from 'swr';
-import useTranslation from 'next-translate/useTranslation';
 import Link from 'next-translate/Link';
 
 // Custom libs
+import useTranslation from 'next-translate/useTranslation';
 import { graphQLFetcher } from '../../libs/fetchers';
 import { getI18nProps, withI18n } from '../../libs/i18n';
 
@@ -22,7 +22,7 @@ const BrandsPage = (props) => {
 
   // Get data
   const { data, error } = useSWR(GET_ALL_BRANDS, graphQLFetcher, {
-    initialData: props,
+    initialData: props
   });
 
   if (error) {
@@ -42,9 +42,7 @@ const BrandsPage = (props) => {
         <ul>
           {data.getAllBrands.map((b) => (
             <li key={b.id}>
-              <Link href={`/${t('layout:brands-slug')}/${b.slug}`}>
-                {b.name}
-              </Link>
+              <Link href={`/${t('layout:brands-slug')}/${b.slug}`}>{b.name}</Link>
             </li>
           ))}
         </ul>

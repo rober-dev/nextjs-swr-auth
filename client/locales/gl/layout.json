@@ -4,5 +4,13 @@
   "language-name-gl": "Galego",
   "home": "Páxina inicial",
   "brands": "Marcas",
-  "brands-slug": "marcas"
+  "brands-slug": "marcas",
+  "login-slug": "entrar",
+  "login": "Entrar",
+  "register-slug": "rexistro",
+  "register": "Rexistro",
+  "logout-slug": "sair",
+  "logout": "Sair",
+  "profile-slug": "perfil",
+  "profile": "Datos usuario"
 }

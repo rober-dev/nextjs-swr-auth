@@ -4,5 +4,13 @@
   "language-name-gl": "Gallego",
   "home": "Inicio",
   "brands": "Marcas",
-  "brands-slug": "marcas"
+  "brands-slug": "marcas",
+  "login-slug": "entrar",
+  "login": "Entrar",
+  "register-slug": "registro",
+  "register": "Registro",
+  "logout-slug": "salir",
+  "logout": "Salir",
+  "profile-slug": "perfil",
+  "profile": "Datos usuario"
 }

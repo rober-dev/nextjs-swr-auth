@@ -4,18 +4,32 @@ const jwt = require('jsonwebtoken');
 // Custom libs
 const users = require('../../data/users.json');
 
+// Save cookie to browser
+function saveCookie(res, refreshToken) {
+  res.cookie('jid', refreshToken, {
+    httpOnly: true,
+    domain: process.env.DOMAIN || 'localhost',
+  });
+}
+
 module.exports.login = (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(403).json('Invalid data');
   }
 
+  // Validate user
   const user = users.find((u) => u.email === email && u.password === password);
   if (!user) {
     return res.status(403).json('Invalid data');
   }
 
+  // Generate tokens
   const { accessToken, refreshToken } = generateTokens(user);
+
+  // Save refresh token in cookie
+  saveCookie(res, refreshToken);
+
   return res.json({
     accessToken,
     refreshToken,

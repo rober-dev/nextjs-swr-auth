@@ -1,10 +1,8 @@
 // Vendor libs
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const path = require('path');
 
 // Apollo libs
 const { ApolloServer } = require('apollo-server-express');
@@ -20,7 +18,8 @@ const typeDefs = require('./graphql/type-defs');
 
 // Load environment variables
 dotenv.config();
-const { PORT, NODE_ENV } = process.env;
+
+const { WEB_PWA, WEB_ADMIN, PORT, NODE_ENV } = process.env;
 
 const run = async () => {
   const apolloServer = new ApolloServer({ typeDefs, resolvers });
@@ -29,13 +28,17 @@ const run = async () => {
   const app = express();
   app.use(bodyParser.json({ extended: false }));
 
+  // Setup cors
+  const corsOptions = {
+    credentials: true,
+    origin: [WEB_PWA, WEB_ADMIN],
+  };
+  app.use(cors(corsOptions));
+
+  // Express routes
+  app.get('/healthcheck', (req, res) => res.json('ok'));
   app.post('/auth/login', authRoutes.login);
   app.post('/auth/register', authRoutes.register);
-  app.get('/catalog/brands', catalogRoutes.brands);
-  app.get('/catalog/brands/:id', catalogRoutes.brandById);
-  app.get('/catalog/products', catalogRoutes.products);
-  app.get('/catalog/products/:id', catalogRoutes.productById);
-  app.get('/catalog/products/:id/stock', stockRoutes.stockByProduct);
 
   apolloServer.applyMiddleware({ app });
 

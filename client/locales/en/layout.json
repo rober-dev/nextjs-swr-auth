@@ -4,5 +4,13 @@
   "language-name-gl": "Galician",
   "home": "Home",
   "brands": "Brands",
-  "brands-slug": "brands"
+  "brands-slug": "brands",
+  "login-slug": "login",
+  "login": "Login",
+  "register-slug": "register",
+  "register": "Register",
+  "logout-slug": "logout",
+  "logout": "Logout",
+  "profile-slug": "profile",
+  "profile": "Profile"
 }

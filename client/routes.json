@@ -1,0 +1,67 @@
+[
+  {
+    "destination": "/auth/login",
+    "trans": [
+      {
+        "lang": "es",
+        "source": "/es/auth/entrar"
+      },
+      {
+        "lang": "gl",
+        "source": "/gl/auth/entrar"
+      }
+    ]
+  },
+  {
+    "destination": "/auth/register",
+    "trans": [
+      {
+        "lang": "es",
+        "source": "/es/auth/registro"
+      },
+      {
+        "lang": "gl",
+        "source": "/gl/auth/rexistro"
+      }
+    ]
+  },
+  {
+    "destination": "/auth/profile",
+    "trans": [
+      {
+        "lang": "es",
+        "source": "/es/auth/perfil"
+      },
+      {
+        "lang": "gl",
+        "source": "/gl/auth/perfil"
+      }
+    ]
+  },
+  {
+    "destination": "/brands",
+    "trans": [
+      {
+        "lang": "es",
+        "source": "/es/marcas"
+      },
+      {
+        "lang": "gl",
+        "source": "/gl/marcas"
+      }
+    ]
+  },
+  {
+    "destination": "/brands/:slug*",
+    "trans": [
+      {
+        "lang": "es",
+        "source": "/es/marcas/:slug*"
+      },
+      {
+        "lang": "gl",
+        "source": "/gl/marcas/:slug*"
+      }
+    ]
+  }
+]

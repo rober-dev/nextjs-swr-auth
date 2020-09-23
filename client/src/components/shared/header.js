@@ -25,6 +25,26 @@ const Header = () => {
             {t('layout:brands')}
           </Link>
         </li>
+
+        <li></li>
+
+        <li>
+          <Link href={`/auth/${t('layout:login-slug')}`} lang={lang}>
+            {t('layout:login')}
+          </Link>
+        </li>
+
+        <li>
+          <Link href={`/auth/${t('layout:register-slug')}`} lang={lang}>
+            {t('layout:register')}
+          </Link>
+        </li>
+
+        <li>
+          <Link href={`/auth/${t('layout:profile-slug')}`} lang={lang}>
+            {t('layout:profile')}
+          </Link>
+        </li>
       </ul>
     </>
   );

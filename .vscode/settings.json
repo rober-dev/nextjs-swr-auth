@@ -1,5 +1,70 @@
 {
+  // Fonts settings
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "Fira Code",
+  "explorer.compactFolders": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "eslint.packageManager": "yarn",
+
+  "[javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[javascriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+
+  "files.associations": {
+    ".sequelizerc": "javascript",
+    ".stylelintrc": "json",
+    ".prettierrc": "json"
+  },
+
+  "editor.renderLineHighlight": "all",
+
+  "terminal.integrated.fontSize": 12,
+
+  "extensions.ignoreRecommendations": true,
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+
+  "gitlens.codeLens.recentChange.enabled": false,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "breadcrumbs.enabled": true,
+  "git.enableSmartCommit": true,
+
+  "workbench.activityBar.visible": true,
+
   "files.exclude": {
-    "**/pages": true
-  }
+    "**/pages": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  },
+  "typescript.validate.enable": false,
+  "tslint.exclude": ["**/node_modules/**"],
+  "debug.node.autoAttach": "on"
 }
