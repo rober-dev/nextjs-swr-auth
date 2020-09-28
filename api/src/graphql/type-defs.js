@@ -6,6 +6,7 @@ module.exports = gql`
     id: ID!
     name: String!
     slug: String!
+    lng: String
   }
 
   type Product {

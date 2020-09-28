@@ -27,14 +27,60 @@ export const postLogin = ({ lang, email, password, rememberMe }) => {
           withCredentials: true
         }
       )
-      .then((res) => {
-        if (res && res.data && res.data.ok) {
+      .then(res => {
+        if (res && res.data && res.status === 200) {
           resolve(res.data);
         } else {
           reject(res.data);
         }
       })
-      .catch((err) => {
+      .catch(err => {
+        reject(err.message);
+      });
+  });
+};
+
+export const removeRefreshToken = () => {
+  const REFRES_TOKEN_URL = `${API_URL}/auth/remove-refresh-token/`;
+  return new Promise((resolve, reject) => {
+    axios
+      .post(REFRES_TOKEN_URL, {
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        withCredentials: true
+      })
+      .then(res => {
+        if (res && res.data && res.status === 200) {
+          resolve(res.data);
+        } else {
+          reject(res.data);
+        }
+      })
+      .catch(err => {
+        reject(err.message);
+      });
+  });
+};
+
+export const renewToken = () => {
+  const RENEW_TOKEN_URL = `${API_URL}/auth/refresh-token/`;
+  return new Promise((resolve, reject) => {
+    axios
+      .get(RENEW_TOKEN_URL, {
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        withCredentials: true
+      })
+      .then(res => {
+        if (res && res.data && res.status === 200) {
+          resolve(res.data);
+        } else {
+          reject(res.data);
+        }
+      })
+      .catch(err => {
         reject(err.message);
       });
   });
@@ -69,14 +115,14 @@ export const postRegister = ({
           withCredentials: true
         }
       )
-      .then((res) => {
+      .then(res => {
         if (res && res.data && res.data.ok) {
           resolve(res.data);
         } else {
           reject(res.data);
         }
       })
-      .catch((err) => {
+      .catch(err => {
         reject(err.message);
       });
   });

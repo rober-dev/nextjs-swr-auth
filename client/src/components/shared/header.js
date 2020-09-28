@@ -1,19 +1,46 @@
 // Vendor libs
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next-translate/Link';
 import useTranslation from 'next-translate/useTranslation';
 
 // Custom components
 import ChangeLanguage from './change-lang';
 
+// Context
+import { AuthContext } from '../../context/auth';
+
 // Component definition
-const Header = () => {
+const Header = props => {
+  // Context members
+  const { user, setAuth, logOut } = useContext(AuthContext);
+
   const { t, lang } = useTranslation();
 
   return (
     <>
       <h3>Header</h3>
       <ChangeLanguage />
+
+      <hr />
+
+      {user && (
+        <>
+          <p>Current user: {user.email}</p>
+          <button type='button' onClick={() => logOut()}>
+            LogOut
+          </button>
+        </>
+      )}
+
+      {!user && (
+        <>
+          <p>Current user: Guest</p>
+          <Link href='/auth/login'>
+            <a>Login</a>
+          </Link>
+        </>
+      )}
+      <hr />
       <ul>
         <li>
           <Link href='/' lang={lang}>

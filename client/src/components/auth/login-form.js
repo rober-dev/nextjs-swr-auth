@@ -9,12 +9,11 @@ const LoginForm = ({ onFormSuccess }) => {
   // Component state
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [username, setUsername] = useState();
   const [rememberMe, setRememberMe] = useState(false);
 
   function onFormSuccessHandler(e) {
     e.preventDefault();
-    onFormSuccess({ email, password, username, rememberMe });
+    onFormSuccess({ email, password, rememberMe });
   }
 
   return (
@@ -37,16 +36,6 @@ const LoginForm = ({ onFormSuccess }) => {
           type='password'
           autoComplete='current password'
           onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-
-      <div>
-        <input
-          placeholer='user name'
-          name='username'
-          type='text'
-          autoComplete='confirm password'
-          onChange={(e) => setUsername(e.target.value)}
         />
       </div>
 

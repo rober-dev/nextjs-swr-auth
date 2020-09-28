@@ -1,5 +1,6 @@
 {
   "title": "Marcas",
   "brands": "Marcas",
-  "brand": "Marca"
+  "brand": "Marca",
+  "brands-slug": "brands"
 }

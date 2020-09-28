@@ -1,5 +1,5 @@
 // Vendor libs
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 // Custom libs
 import useTranslation from 'next-translate/useTranslation';
@@ -10,18 +10,31 @@ import { postLogin } from '../../libs/auth';
 import Layout from '../../layouts/default';
 import LoginForm from '../../components/auth/login-form';
 
+// Context
+import { AuthContext } from '../../context/auth';
+
 // Component definition
 const LoginPage = () => {
+  // Context members
+  const { user, setAuth, logOut } = useContext(AuthContext);
+
   const { t, lang } = useTranslation();
 
   async function onLoginFormSuccessHandler(args) {
     const result = await postLogin({ ...args, lang });
+
+    if (result.accessToken) {
+      setAuth(result.accessToken);
+    }
   }
 
   return (
     <Layout>
       <h1>{t('auth:login')}</h1>
-      <LoginForm onFormSuccess={onLoginFormSuccessHandler} />
+
+      {user && <p>Current user: {user.email}</p>}
+
+      {!user && <LoginForm onFormSuccess={onLoginFormSuccessHandler} />}
     </Layout>
   );
 };

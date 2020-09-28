@@ -1,5 +1,5 @@
 // Vendor libs
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -7,6 +7,10 @@ import useTranslation from 'next-translate/useTranslation';
 // Custom libs
 import { graphQLFetcher } from '../../libs/fetchers';
 import { getI18nProps, withI18n } from '../../libs/i18n';
+import { getAccessToken } from '../../libs/token-helper';
+
+// Context
+import { AuthContext } from '../../context/auth';
 
 // Custom components
 import Layout from '../../layouts/default';
@@ -15,7 +19,10 @@ import Layout from '../../layouts/default';
 import { GET_BRAND_BY_SLUG, GET_BRAND_SLUGS } from '../../queries/brands';
 
 // Component definition
-const BrandPage = (props) => {
+const BrandPage = props => {
+  // Context members
+  const { user, accessToken } = useContext(AuthContext);
+
   // Get translations
   const { t, lang } = useTranslation();
   const title = t('brands:brand');
@@ -24,12 +31,18 @@ const BrandPage = (props) => {
   const router = useRouter();
   const { slug } = router.query;
 
+  // Get headers
+  const headers = {
+    lng: lang,
+    authorization: accessToken
+  };
+
   // Get data
   const { data, error } = useSWR(
-    [GET_BRAND_BY_SLUG, { slug }],
+    [GET_BRAND_BY_SLUG, { slug }, headers],
     graphQLFetcher,
     {
-      initialData: props,
+      initialData: props
     }
   );
 
@@ -47,9 +60,10 @@ const BrandPage = (props) => {
       <h1>
         {title} - {lang}
       </h1>
+
       {brand && (
         <div>
-          <h3>{brand.name}</h3>
+          <h2>{brand.name}</h2>
           <p>{brand.id}</p>
           <p>{brand.slug}</p>
         </div>
@@ -60,24 +74,31 @@ const BrandPage = (props) => {
 
 // Static props
 export async function getStaticProps(ctx) {
-  const { slug } = ctx.params;
-  const data = await graphQLFetcher(GET_BRAND_BY_SLUG, { slug });
-  const trans = await getI18nProps(ctx, ['common', 'brands']);
+  const headers = {
+    lng: ctx.lang
+  };
 
-  console.log(ctx);
+  const { slug } = ctx.params;
+  const trans = await getI18nProps(ctx, ['common', 'brands']);
+  const data = await graphQLFetcher(GET_BRAND_BY_SLUG, { slug }, headers);
+
   return { props: { ...data, ...trans }, revalidate: 1 };
 }
 
 // Static paths
-export async function getStaticPaths() {
-  const data = await graphQLFetcher(GET_BRAND_SLUGS);
-  const paths = data.getBrandSlugs.map((slug) => ({
-    params: { slug },
+export async function getStaticPaths(ctx) {
+  const headers = {
+    lng: ctx.lang
+  };
+
+  const data = await graphQLFetcher(GET_BRAND_SLUGS, {}, headers);
+  const paths = data.getBrandSlugs.map(slug => ({
+    params: { slug }
   }));
 
   return {
     paths,
-    fallback: true,
+    fallback: true
   };
 }
 

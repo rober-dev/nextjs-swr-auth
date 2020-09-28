@@ -16,6 +16,8 @@ module.exports = {
   },
   env: {
     API_URL: process.env.API_URL,
-    PORT: process.env.PORT
+    PORT: process.env.PORT,
+    STORE_KEY: process.env.STORE_KEY,
+    DOMAIN: process.env.DOMAIN
   }
 };

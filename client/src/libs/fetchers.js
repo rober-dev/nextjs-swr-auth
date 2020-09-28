@@ -1,20 +1,23 @@
 // Vendor libs
 import { GraphQLClient } from 'graphql-request';
 import axios from 'axios';
+import { allLanguages, defaultLanguage } from '../../i18n.json';
 
-// Custom libs
-import { getAccessToken } from './token-helper';
+// Get environment variables
+const API_URL = process.env.API_URL;
+const STORE_KEY = process.env.STORE_KEY;
+
+// Private members
+const headers = {
+  'Content-Type': 'application/json;charset=UTF-8',
+  'store-key': STORE_KEY
+};
 
 // API REST client setup
-const API_URL = process.env.API_URL;
 const getRequest = {
   baseURL: API_URL,
   withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json;charset=UTF-8',
-    lng: 'es',
-    authorization: getAccessToken()
-  }
+  headers
 };
 
 export const apiRestFecher = (url, args) =>
@@ -23,12 +26,11 @@ export const apiRestFecher = (url, args) =>
 // ----------------------------------------------------
 
 // GRAPHQL client setup
-const GRAPHQL_URL = `${process.env.API_URL}/graphql`;
+const GRAPHQL_URL = `${API_URL}/graphql`;
 const graphQLClient = new GraphQLClient(GRAPHQL_URL, {
-  headers: {
-    'Content-Type': 'application/json;charset=UTF-8',
-    lng: 'es',
-    authorization: getAccessToken()
-  }
+  headers
 });
-export const graphQLFetcher = (query, variables) => graphQLClient.request(query, variables);
+export const graphQLFetcher = (query, variables, headers) => {
+  graphQLClient.options.headers = { ...graphQLClient.options.headers, ...headers };
+  return graphQLClient.request(query, variables);
+};
