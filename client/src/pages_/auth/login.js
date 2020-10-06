@@ -11,12 +11,12 @@ import Layout from '../../layouts/default';
 import LoginForm from '../../components/auth/login-form';
 
 // Context
-import { AuthContext } from '../../context/auth';
+import { AuthContext } from '../../context/auth.context';
 
 // Component definition
 const LoginPage = () => {
   // Context members
-  const { user, setAuth, logOut } = useContext(AuthContext);
+  const { user, setToken, logOut } = useContext(AuthContext);
 
   const { t, lang } = useTranslation();
 
@@ -24,7 +24,7 @@ const LoginPage = () => {
     const result = await postLogin({ ...args, lang });
 
     if (result.accessToken) {
-      setAuth(result.accessToken);
+      setToken(result.accessToken);
     }
   }
 
@@ -32,7 +32,12 @@ const LoginPage = () => {
     <Layout>
       <h1>{t('auth:login')}</h1>
 
-      {user && <p>Current user: {user.email}</p>}
+      {user && (
+        <>
+          <p>Current user: {user.email}</p>
+          <button onClick={logOut}>Log out</button>
+        </>
+      )}
 
       {!user && <LoginForm onFormSuccess={onLoginFormSuccessHandler} />}
     </Layout>

@@ -25,6 +25,7 @@
     "graphql": "^15.3.0",
     "graphql-request": "^3.1.0",
     "graphql-tag": "^2.11.0",
+    "isomorphic-unfetch": "^3.0.0",
     "jwt-decode": "^3.0.0-beta.2",
     "next": "^9.5.3",
     "next-translate": "^0.17.2",

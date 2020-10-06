@@ -1,4 +1,5 @@
 {
   "title": "Bos días terra",
-  "variable-example": "Usando a variable {{count}}"
+  "variable-example": "Usando a variable {{count}}",
+  "back": "tornar"
 }

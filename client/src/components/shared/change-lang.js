@@ -4,28 +4,48 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import i18nConfig from '../../../i18n.json';
 import { useRouter } from 'next/router';
-import { getTranslatedLink } from '../../libs/route-helper';
 
 // Component definition
-const ChangeLanguage = (props) => {
+const ChangeLanguage = props => {
   const router = useRouter();
 
-  const { allLanguages } = i18nConfig;
-  const { t, lang } = useTranslation();
+  const { allLanguages, defaultLanguage } = i18nConfig;
+  const { t } = useTranslation();
 
-  return allLanguages.map((lng) => {
-    if (lng === lang) return null;
+  function removeLang(path) {
+    if (path.length < 4) {
+      return path;
+    }
 
-    const href = getTranslatedLink(lng, router);
+    const lang = path.substr(0, 4);
+    if (lang[0] === '/' && lang[3] === '/') {
+      return path.substr(3);
+    }
 
-    return (
-      <div key={lng}>
-        <Link href={href} key={lng}>
-          {t(`layout:language-name-${lng}`)}
-        </Link>
-        <span>&nbsp; | &nbsp;</span>
-      </div>
-    );
+    return path;
+  }
+
+  function getTranslatedLink(lng) {
+    // Remove lang from pathname
+    const currentPath = removeLang(router.asPath);
+    if (lng === defaultLanguage) {
+      return currentPath;
+    } else {
+      return `/${lng}${currentPath}`;
+    }
+  }
+
+  return allLanguages.map(lng => {
+    if (router) {
+      return (
+        <div key={lng}>
+          <Link href={getTranslatedLink(lng)}>
+            {t(`layout:language-name-${lng}`)}
+          </Link>
+          <span>&nbsp; | &nbsp;</span>
+        </div>
+      );
+    }
   });
 };
 

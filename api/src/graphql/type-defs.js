@@ -12,6 +12,7 @@ module.exports = gql`
   type Product {
     id: ID!
     name: String!
+    slug: String!
     price: Float!
     description: String
   }
@@ -36,7 +37,9 @@ module.exports = gql`
     getBrandById(id: ID!): Brand
     getBrandBySlug(slug: String!): Brand
     getBrandSlugs: [String!]!
+    getProductBySlug(slug: String!): Product
     getAllProducts: [Product!]!
-    productStock(productId: ID!): Stock
+    getProductStock(slug: String!): Stock
+    getProductSlugs: [String!]!
   }
 `;

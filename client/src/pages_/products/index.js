@@ -16,24 +16,23 @@ import { AuthContext } from '../../context/auth.context';
 import Layout from '../../layouts/default';
 
 // Queries
-import { GET_ALL_BRANDS } from '../../queries/brands';
+import { GET_ALL_PRODUCTS } from '../../queries/products';
 
 // Component definition
-const BrandsPage = props => {
+const ProductsPage = props => {
   // Context members
   const { accessToken } = useContext(AuthContext);
 
   // Get translations
   const { t, lang } = useTranslation();
-  const title = t('brands:brands');
+  const title = t('catalog:products');
 
-  // Get headers
+  // Set headers
   const headers = getStaticHeaders(props);
-  headers.lng = lang;
   headers.authorization = accessToken ? `Bearer ${accessToken}` : '';
 
   const { data, error } = useSWR(
-    [GET_ALL_BRANDS, null, headers],
+    [GET_ALL_PRODUCTS, null, headers],
     graphQLFetcher,
     {
       initialData: props
@@ -53,12 +52,11 @@ const BrandsPage = props => {
       <h1>
         {title} - {lang}
       </h1>
-
-      {data && data.getAllBrands && (
+      {data && data.getAllProducts && (
         <ul>
-          {data.getAllBrands.map(b => (
+          {data.getAllProducts.map(b => (
             <li key={b.id}>
-              <Link href={`/brands/${b.slug}`}>{b.name}</Link>
+              <Link href={`/products/${b.slug}`}>{b.name}</Link>
             </li>
           ))}
         </ul>
@@ -69,11 +67,14 @@ const BrandsPage = props => {
 
 // Static props
 export async function getStaticProps(ctx) {
-  const data = await graphQLFetcher(GET_ALL_BRANDS, {}, getStaticHeaders(ctx));
-  const trans = await getI18nProps(ctx, ['common', 'brands']);
+  const data = await graphQLFetcher(
+    GET_ALL_PRODUCTS,
+    {},
+    getStaticHeaders(ctx)
+  );
+  const trans = await getI18nProps(ctx, ['common', 'catalog']);
 
   return { props: { ...data, ...trans }, revalidate: 1 };
 }
 
-// export default BrandsPage;
-export default withI18n(BrandsPage);
+export default withI18n(ProductsPage);

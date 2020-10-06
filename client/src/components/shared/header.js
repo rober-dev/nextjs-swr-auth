@@ -7,12 +7,12 @@ import useTranslation from 'next-translate/useTranslation';
 import ChangeLanguage from './change-lang';
 
 // Context
-import { AuthContext } from '../../context/auth';
+import { AuthContext } from '../../context/auth.context';
 
 // Component definition
 const Header = props => {
   // Context members
-  const { user, setAuth, logOut } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   const { t, lang } = useTranslation();
 
@@ -48,27 +48,33 @@ const Header = props => {
           </Link>
         </li>
         <li>
-          <Link href={`/${t('layout:brands-slug')}`} lang={lang}>
+          <Link href='/brands' lang={lang}>
             {t('layout:brands')}
+          </Link>
+        </li>
+
+        <li>
+          <Link href='/products' lang={lang}>
+            {t('layout:products')}
           </Link>
         </li>
 
         <li></li>
 
         <li>
-          <Link href={`/auth/${t('layout:login-slug')}`} lang={lang}>
+          <Link href='/auth/login' lang={lang}>
             {t('layout:login')}
           </Link>
         </li>
 
         <li>
-          <Link href={`/auth/${t('layout:register-slug')}`} lang={lang}>
+          <Link href='/auth/register' lang={lang}>
             {t('layout:register')}
           </Link>
         </li>
 
         <li>
-          <Link href={`/auth/${t('layout:profile-slug')}`} lang={lang}>
+          <Link href='/auth/profile' lang={lang}>
             {t('layout:profile')}
           </Link>
         </li>

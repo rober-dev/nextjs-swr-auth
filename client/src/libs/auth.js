@@ -46,7 +46,7 @@ export const removeRefreshToken = () => {
     axios
       .post(REFRES_TOKEN_URL, {
         headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
+          'Content-Type': 'application/json;'
         },
         withCredentials: true
       })

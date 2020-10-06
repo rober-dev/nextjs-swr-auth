@@ -21,7 +21,7 @@ const getRequest = {
 };
 
 export const apiRestFecher = (url, args) =>
-  axios({ ...getRequest, url, params: { args } }).then((res) => res.data);
+  axios({ ...getRequest, url, params: { args } }).then(res => res.data);
 
 // ----------------------------------------------------
 
@@ -31,6 +31,9 @@ const graphQLClient = new GraphQLClient(GRAPHQL_URL, {
   headers
 });
 export const graphQLFetcher = (query, variables, headers) => {
-  graphQLClient.options.headers = { ...graphQLClient.options.headers, ...headers };
+  graphQLClient.options.headers = {
+    ...graphQLClient.options.headers,
+    ...headers
+  };
   return graphQLClient.request(query, variables);
 };

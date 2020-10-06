@@ -1,4 +1,5 @@
 {
   "title": "Hola mundo",
-  "variable-example": "Usando la variable {{count}}"
+  "variable-example": "Usando la variable {{count}}",
+  "back": "volver"
 }

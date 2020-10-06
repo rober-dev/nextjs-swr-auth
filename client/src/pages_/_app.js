@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Contexts
-import { AuthProvider } from '../context/auth';
+import { AuthProvider } from '../context/auth.context';
 
 // Component definition
 const BaseApp = ({ Component, pageProps }) => {

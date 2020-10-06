@@ -5,6 +5,8 @@
   "home": "Home",
   "brands": "Brands",
   "brands-slug": "brands",
+  "products": "Products",
+  "products-slug": "products",
   "login-slug": "login",
   "login": "Login",
   "register-slug": "register",

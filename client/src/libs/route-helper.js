@@ -1,10 +1,10 @@
-import routes from '../../routes.json';
+// import routes from '../../routes.json';
 import i18nConfig from '../../i18n.json';
 
 const { allLanguages, defaultLanguage } = i18nConfig;
 
 function replaceParams(currentTranslatedRoute, query, asPath) {
-  const params = Object.keys(query).map((k) => {
+  const params = Object.keys(query).map(k => {
     return { key: `:${k}*`, value: query[k] };
   });
   params.forEach(({ key, value }) => {
@@ -48,21 +48,7 @@ export const getTranslatedLink = (lng, router) => {
       currentPath = currentPath.replace('[', ':').replace(']', '*');
     }
 
-    // Try get destination
-    const currentRoute = routes.find((r) => r.destination === currentPath);
-    if (currentRoute) {
-      let currentTranslatedRouteSource = currentRoute.destination;
-      if (lng !== defaultLanguage) {
-        const currentTranslatedRoute = currentRoute.trans.find((tr) => tr.lang === lng);
-        if (currentTranslatedRoute) {
-          currentTranslatedRouteSource = currentTranslatedRoute.source;
-        }
-      }
-
-      return replaceParams(currentTranslatedRouteSource, query, asPath);
-    }
-
-    return lng === defaultLanguage ? '/' : `/${lng}`;
+    return replaceParams(currentTranslatedRouteSource, query, asPath);
   } catch (err) {
     console.error('Error trying get translated link', { lng, router, err });
     return '/';

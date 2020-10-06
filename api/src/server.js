@@ -55,7 +55,7 @@ const run = async () => {
   app.get('/healthcheck', (req, res) => res.json('ok'));
   app.post('/auth/login', authRoutes.login);
   app.post('/auth/register', authRoutes.register);
-  app.get('/auth/refresh-token/', authRoutes.refresh_token);
+  app.post('/auth/refresh-token/', authRoutes.refresh_token);
   app.post('/auth/remove-refresh-token/', authRoutes.remove_refresh_token);
 
   apolloServer.applyMiddleware({ app });

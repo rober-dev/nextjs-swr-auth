@@ -3,14 +3,14 @@ import React, { useEffect, useState, useContext } from 'react';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import Link from 'next-translate/Link';
 
 // Custom libs
 import { graphQLFetcher } from '../../libs/fetchers';
 import { getI18nProps, withI18n } from '../../libs/i18n';
-import { getAccessToken } from '../../libs/token-helper';
 
 // Context
-import { AuthContext } from '../../context/auth';
+import { AuthContext } from '../../context/auth.context';
 
 // Custom components
 import Layout from '../../layouts/default';
@@ -21,11 +21,12 @@ import { GET_BRAND_BY_SLUG, GET_BRAND_SLUGS } from '../../queries/brands';
 // Component definition
 const BrandPage = props => {
   // Context members
-  const { user, accessToken } = useContext(AuthContext);
+  const { accessToken } = useContext(AuthContext);
 
   // Get translations
   const { t, lang } = useTranslation();
-  const title = t('brands:brand');
+  const t_title = t('brands:brand');
+  const t_back = t('common:back');
 
   // Get params
   const router = useRouter();
@@ -34,7 +35,7 @@ const BrandPage = props => {
   // Get headers
   const headers = {
     lng: lang,
-    authorization: accessToken
+    authorization: accessToken ? `Bearer ${accessToken}` : ''
   };
 
   // Get data
@@ -58,8 +59,12 @@ const BrandPage = props => {
   return (
     <Layout>
       <h1>
-        {title} - {lang}
+        {t_title} - {lang}
       </h1>
+
+      <Link href='/brands' lang={lang} key={lang}>
+        {t_back}
+      </Link>
 
       {brand && (
         <div>
