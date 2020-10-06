@@ -1,5 +1,5 @@
 [
-  { "productId": 1, "current": 99, "min": 5 },
+  { "productId": 1, "current": 9, "min": 5 },
   { "productId": 2, "current": 15, "min": 3 },
   { "productId": 3, "current": 22, "min": 4 },
   { "productId": 4, "current": 0, "min": 5 },

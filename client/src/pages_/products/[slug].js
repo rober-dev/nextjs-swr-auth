@@ -21,7 +21,6 @@ import { GET_STOCK_BY_PRODUCT } from '../../queries/stock';
 
 // Component definition
 const ProductPage = props => {
-  debugger;
   // Context members
   const { accessToken } = useContext(AuthContext);
 
